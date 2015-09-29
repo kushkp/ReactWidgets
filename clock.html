@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Weather Clock Widget</title>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  </head>
+  <body>
+    <div id="clock"></div>
+    <div id="weather"></div>
+
+    <script type="text/jsx">
+      var Clock = React.createClass({
+        getInitialState: function() {
+          return {timer: new Date()};
+        },
+
+        componentDidMount: function() {
+          var intervalId = window.setInterval(function() {
+            this.setState({timer: new Date()});
+          }.bind(this), 1000);
+        },
+        render: function() {
+          return (
+            <div>
+              {this.state.timer.toDateString()}
+              {this.state.timer.toTimeString()}
+              <Weather />
+            </div>
+
+          );
+        }
+      });
+
+      var Weather = React.createClass({
+        getInitialState: function() {
+          return {};
+        },
+        render: function() {
+          return (
+            <div></div>
+          );
+        }
+      });
+
+
+      React.render(
+        <Clock />,
+        document.getElementById('clock')
+      );
+    </script>
+  </body>
+</html>

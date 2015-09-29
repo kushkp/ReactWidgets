@@ -16,12 +16,15 @@
           return {searchInput: "", listings: this.props.items};
         },
         filterListings: function(e) {
+          var searchval = e.target.value.toLowerCase();
+          var newListings = this.props.items.filter(function(value) {
+            testVal = value.substr(0,searchval.length);
+            return testVal.toLowerCase() === searchval;
+          }.bind(this));
+
           this.setState({
-            searchInput: e.target.value.toLowerCase(),
-            listings: this.props.items.filter(function(value) {
-              testVal = value.substr(0,this.state.searchInput.length);
-              return testVal.toLowerCase() === this.state.searchInput;
-            }.bind(this))
+            searchInput: searchval,
+            listings: newListings
           });
         },
         render: function() {
@@ -29,11 +32,15 @@
             <div>
               <input type="text"
                      id="inputField"
-                     onKeyDown={this.filterListings}>
+                     onKeyUp={this.filterListings}>
               </input>
               <ul className="possibleValues">
                 { this.state.listings.map(function(name, index) {
-                  return <li>{name}</li>;
+                  return (
+                    <li onClick={this.setState({searchInput: name})}>
+                      {name}
+                    </li>)
+                  );
                 }) }
               </ul>
             </div>
@@ -42,7 +49,7 @@
       });
 
       React.render(
-        React.createElement(Autocomplete, {items: names}, ""),
+        <Autocomplete items={names} />,
         document.getElementById('component')
       );
     </script>
