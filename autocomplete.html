@@ -27,6 +27,11 @@
             listings: newListings
           });
         },
+        setInputField: function(name) {
+          this.setState({
+            searchInput: name
+          });
+        },
         render: function() {
           return (
             <div>
@@ -38,7 +43,7 @@
                 { this.state.listings.map(function(name, index) {
 
                   return (
-                    <li onClick={this.setState({});}>
+                    <li onClick={this.setInputField(name)}>
                       {name}
                     </li>
                   );
