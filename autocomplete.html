@@ -36,17 +36,24 @@
               </input>
               <ul className="possibleValues">
                 { this.state.listings.map(function(name, index) {
+
                   return (
-                    <li onClick={this.setState({searchInput: name})}>
+                    <li onClick={this.setState({});}>
                       {name}
-                    </li>)
+                    </li>
                   );
-                }) }
+
+                }.bind(this)) }
               </ul>
             </div>
           );
         }
       });
+                  // return (
+                  //   <li onClick={this.setState({searchInput: name})}>
+                  //     {name}
+                  //   </li>)
+                  // );
 
       React.render(
         <Autocomplete items={names} />,
