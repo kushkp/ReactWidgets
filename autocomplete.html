@@ -27,9 +27,9 @@
             listings: newListings
           });
         },
-        setInputField: function(name) {
+        setInputField: function(event) {
           this.setState({
-            searchInput: name
+            searchInput: event.target.outerText
           });
         },
         render: function() {
@@ -37,13 +37,14 @@
             <div>
               <input type="text"
                      id="inputField"
-                     onKeyUp={this.filterListings}>
+                     value={this.state.searchInput}
+                     onChange={this.filterListings}>
               </input>
               <ul className="possibleValues">
                 { this.state.listings.map(function(name, index) {
 
                   return (
-                    <li onClick={this.setInputField(name)}>
+                    <li onClick={this.setInputField}>
                       {name}
                     </li>
                   );
