@@ -9,6 +9,40 @@
     <div id="weather"></div>
 
     <script type="text/jsx">
+
+      var Weather = React.createClass({
+        getInitialState: function() {
+          return {
+            lat: null,
+            lng: null,
+            temp: null,
+            weather: null
+          };
+        },
+        componentDidMount: function() {
+          // function success(pos) {
+          //   this.setState({ lat: pos.coords.latitude });
+          //   this.setState({ lng: pos.coords.longitude });
+          //   debugger
+          // };
+
+            // debugger
+          navigator.geolocation.getCurrentPosition(function() {
+            this.setState({ lat: pos.coords.latitude });
+            this.setState({ lng: pos.coords.longitude });
+          }.bind(this));
+        },
+
+        render: function() {
+          return (
+            <div>
+              <Clock />
+              {this.state.lat}
+            </div>
+          );
+        }
+      });
+
       var Clock = React.createClass({
         getInitialState: function() {
           return {timer: new Date()};
@@ -22,27 +56,14 @@
           return (
             <div>
               {this.state.timer.toString()}
-              <Weather />
             </div>
-
-          );
-        }
-      });
-
-      var Weather = React.createClass({
-        getInitialState: function() {
-          return {};
-        },
-        render: function() {
-          return (
-            <div></div>
           );
         }
       });
 
 
       React.render(
-        <Clock />,
+        <Weather />,
         document.getElementById('clock')
       );
     </script>
