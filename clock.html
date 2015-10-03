@@ -13,7 +13,6 @@
         getInitialState: function() {
           return {timer: new Date()};
         },
-
         componentDidMount: function() {
           var intervalId = window.setInterval(function() {
             this.setState({timer: new Date()});
@@ -22,8 +21,7 @@
         render: function() {
           return (
             <div>
-              {this.state.timer.toDateString()}
-              {this.state.timer.toTimeString()}
+              {this.state.timer.toString()}
               <Weather />
             </div>
 
