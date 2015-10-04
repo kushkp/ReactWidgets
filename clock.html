@@ -20,17 +20,31 @@
           };
         },
         componentDidMount: function() {
-          // function success(pos) {
-          //   this.setState({ lat: pos.coords.latitude });
-          //   this.setState({ lng: pos.coords.longitude });
-          //   debugger
-          // };
+          function success(pos) {
+            var latitude = Math.round(pos.coords.latitude);
+            var longitude = Math.round(pos.coords.longitude);
 
+            this.setState({ lat: latitude });
+            this.setState({ lng: longitude });
+
+            var request = new XMLHttpRequest();
+            var url = "http://api.openweathermap.org/data/2.5/weather?lat={" +
+              latitude + "}&lon={" + longitude + "}";
+
+            request.open('GET', url, true);
             // debugger
-          navigator.geolocation.getCurrentPosition(function() {
-            this.setState({ lat: pos.coords.latitude });
-            this.setState({ lng: pos.coords.longitude });
-          }.bind(this));
+            request.onload = function(response) {
+              if (request.status >= 200 && request.status < 400) {
+                // Success!
+                var resp = request.responseText;
+                debugger
+              }
+            };
+            request.send();
+
+          };
+
+          navigator.geolocation.getCurrentPosition(success.bind(this));
         },
 
         render: function() {
@@ -38,6 +52,9 @@
             <div>
               <Clock />
               {this.state.lat}
+              {this.state.lng}
+              {this.state.temperature}
+              {this.state.weather}
             </div>
           );
         }
