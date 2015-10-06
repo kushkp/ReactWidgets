@@ -28,33 +28,30 @@
             this.setState({ lng: longitude });
 
             var request = new XMLHttpRequest();
-            var url = "http://api.openweathermap.org/data/2.5/weather?lat={" +
-              latitude + "}&lon={" + longitude + "}";
+            var url = "http://api.openweathermap.org/data/2.5/weather?lat=" +
+              latitude + "&lon=" + longitude;
 
             request.open('GET', url, true);
-            // debugger
             request.onload = function(response) {
               if (request.status >= 200 && request.status < 400) {
-                // Success!
                 var resp = request.responseText;
-                debugger
+                weather = JSON.parse(resp);
+                this.setState({ temperature: weather.main.temp - 273.15 });
+                this.setState({ weather: weather.weather[0].description });
               }
-            };
-            request.send();
+            }.bind(this);
 
+            request.send();
           };
 
           navigator.geolocation.getCurrentPosition(success.bind(this));
         },
-
         render: function() {
           return (
             <div>
               <Clock />
-              {this.state.lat}
-              {this.state.lng}
-              {this.state.temperature}
-              {this.state.weather}
+              { this.state.temperature ? Math.round(this.state.temperature * 100) / 100 + " degrees Celsius" : "" } 
+              { this.state.weather ? "and " + this.state.weather : "" }
             </div>
           );
         }
