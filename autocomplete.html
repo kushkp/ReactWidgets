@@ -9,7 +9,7 @@
     </div>
 
     <script type="text/jsx">
-       var names = ["Mark", "Michelle", "Mitchell", "Maggie", "Mike", "Michael", "Megan", "Meg", "Mildred", "Edward", "Sam", "Robert", "Nick", "Alan", "Milf"];
+      var names = ["Mark", "Michelle", "Mitchell", "Maggie", "Mike", "Michael", "Megan", "Meg", "Mildred", "Edward", "Sam", "Robert", "Nick", "Alan", "Milf"];
 
       var Autocomplete = React.createClass({
         getInitialState: function() {
@@ -55,11 +55,6 @@
           );
         }
       });
-                  // return (
-                  //   <li onClick={this.setState({searchInput: name})}>
-                  //     {name}
-                  //   </li>)
-                  // );
 
       React.render(
         <Autocomplete items={names} />,

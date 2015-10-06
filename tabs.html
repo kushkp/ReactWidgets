@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>Tabs Widget</title>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  </head>
+  <body>
+    <div id="tabs"></div>
+
+    <script type="text/jsx">
+      var dog1 = {
+        title: "Corgi",
+        content: "Corgis have a cult-like following mainly due to their playful and sweet personalities. According to Welsh mythology, the Pembroke Welsh Corgi was even the transportation mode of choice for fairies."
+      };
+
+      var dog2 = {
+        title: "German Shephard",
+        content: "A relatively new breed (they date back to 1899), German Shepherds are exceptional animals: Courageous, obedient, incredibly loyal, and eager to learn."
+      };
+
+      var dog3 = {
+        title: "Husky",
+        content: "Siberian huskies are stunning animals, with their thick fur coat and piercing eyes. Most people who choose a Husky do so for their extraordinary beauty."
+      };
+
+      var dog4 = {
+        title: "Maltese",
+        content: "One of the most ancient of the toy breeds, Maltese dogs were bred to be sweet and adoring of their owners. The Greeks even erected tombs for their Maltese dogs, and in Elizabethan times, they were called “The Comforter” because it was believed they could relieve pain and cure illness."
+      };
+
+      var dog5 = {
+        title: "Golden Retriever",
+        content: "Goldens are sweet, loyal, and incredible companion dogs. They’d rather be sleeping at your feet then running around outside without you."
+      };
+
+      var dogList = [dog1, dog2, dog3, dog4, dog5];
+
+
+      var Tabs = React.createClass({
+        getInitialState: function() {
+          return {selectedIdx: null};
+          debugger
+        },
+        setInputField: function() {
+          
+        },
+        render: function() {
+          return (
+            <div>
+              <ul className="dogTitles">
+                { this.props.dogs.map(function(dog, index) {
+
+                  return (
+                    <li onHover={this.setInputField}>
+                      {dog.title}
+                    </li>
+                  );
+
+                }.bind(this)) }
+              </ul>
+              <article className=dogDesc>
+                {this.}
+              </article>
+            </div>
+          );
+        }
+      });
+
+      React.render(
+        <Tabs dogs={dogList}/>,
+        document.getElementById('tabs')
+      );
+
+    </script>
+</body>
+</html>
