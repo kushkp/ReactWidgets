@@ -39,27 +39,39 @@
       var Tabs = React.createClass({
         getInitialState: function() {
           return {selectedIdx: null};
+        },
+        displayItem: function(event) {
+          var idx = parseInt(event.target.getAttribute("data-id"));
+          this.state.selectedIdx = idx;
           debugger
         },
-        setInputField: function() {
-          
+        returnContent: function() { //tried create fn since cant use if statement in jsx interpolation
+          if (this.state.selectedIdx) {
+            return this.props.items[this.state.selectedIdx].content;
+          }
+        },
+        returnTitle: function(idx) {
+          if (idx == this.state.selectedIdx) {
+            return "<strong>" + this.props.items[idx].title + "</strong>";
+          } else {
+            return this.props.items[idx].title;
+          }
         },
         render: function() {
           return (
             <div>
               <ul className="dogTitles">
-                { this.props.dogs.map(function(dog, index) {
-
+                { this.props.items.map(function(item, index) {
                   return (
-                    <li onHover={this.setInputField}>
-                      {dog.title}
+                    <li onClick={this.displayItem} data-id={index}>
+                      {this.returnTitle(index)}
                     </li>
                   );
 
                 }.bind(this)) }
               </ul>
-              <article className=dogDesc>
-                {this.}
+              <article className="itemDesc">
+                {}
               </article>
             </div>
           );
@@ -67,7 +79,7 @@
       });
 
       React.render(
-        <Tabs dogs={dogList}/>,
+        <Tabs items={dogList}/>,
         document.getElementById('tabs')
       );
 
