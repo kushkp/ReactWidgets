@@ -35,43 +35,50 @@
 
       var dogList = [dog1, dog2, dog3, dog4, dog5];
 
+      var Headers = React.createClass({
+        render: function() {
+          var selected = this.props.selectedIdx;
+          var that = this;
+          var headers = this.props.items.map(function(item, index) {
+            var title = item.title;
+            if (index === selected) {
+              title = "*" + title + "*";
+            }
+
+            return (
+              <span
+                key={ index }
+                onClick={that.props.onTabChosen.bind(null, index)}>
+                  {title}&nbsp;
+              </span>
+            );
+          });
+          return (
+            <div>
+              {headers}
+            </div>
+          );
+        }
+      });
 
       var Tabs = React.createClass({
         getInitialState: function() {
-          return {selectedIdx: null};
+          return {selectedIdx: 0};
         },
-        displayItem: function(event) {
-          var idx = parseInt(event.target.getAttribute("data-id"));
-          this.state.selectedIdx = idx;
-          debugger
-        },
-        returnContent: function() { //tried create fn since cant use if statement in jsx interpolation
-          if (this.state.selectedIdx) {
-            return this.props.items[this.state.selectedIdx].content;
-          }
-        },
-        returnTitle: function(idx) {
-          if (idx == this.state.selectedIdx) {
-            return "<strong>" + this.props.items[idx].title + "</strong>";
-          } else {
-            return this.props.items[idx].title;
-          }
+        selectTab: function(num) {
+          this.setState({selectedIdx: num});
         },
         render: function() {
+          var selectedItem = this.props.items[this.state.selectedIdx];
           return (
             <div>
-              <ul className="dogTitles">
-                { this.props.items.map(function(item, index) {
-                  return (
-                    <li onClick={this.displayItem} data-id={index}>
-                      {this.returnTitle(index)}
-                    </li>
-                  );
-
-                }.bind(this)) }
-              </ul>
+              <Headers
+                selectedIdx={this.state.selectedIdx}
+                onTabChosen={this.selectTab}
+                items={this.props.items}>
+              </Headers>
               <article className="itemDesc">
-                {}
+                {selectedItem.content}
               </article>
             </div>
           );
