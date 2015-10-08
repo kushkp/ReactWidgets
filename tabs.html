@@ -25,12 +25,12 @@
 
       var dog4 = {
         title: "Maltese",
-        content: "One of the most ancient of the toy breeds, Maltese dogs were bred to be sweet and adoring of their owners. The Greeks even erected tombs for their Maltese dogs, and in Elizabethan times, they were called “The Comforter” because it was believed they could relieve pain and cure illness."
+        content: "One of the most ancient of the toy breeds, Maltese dogs were bred to be sweet and adoring of their owners. The Greeks even erected tombs for their Maltese dogs, and in Elizabethan times, they were called 'The Comforter' because it was believed they could relieve pain and cure illness."
       };
 
       var dog5 = {
         title: "Golden Retriever",
-        content: "Goldens are sweet, loyal, and incredible companion dogs. They’d rather be sleeping at your feet then running around outside without you."
+        content: "Goldens are sweet, loyal, and incredible companion dogs. They would rather be sleeping at your feet then running around outside without you."
       };
 
       var dogList = [dog1, dog2, dog3, dog4, dog5];
@@ -42,7 +42,7 @@
           var headers = this.props.items.map(function(item, index) {
             var title = item.title;
             if (index === selected) {
-              title = "*" + title + "*";
+              title = <strong>{title}</strong>;
             }
 
             return (
