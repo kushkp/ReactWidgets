@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
   <head>
     <title>Weather Clock Widget</title>
@@ -50,7 +51,7 @@
           return (
             <div>
               <Clock />
-              { this.state.temperature ? Math.round(this.state.temperature * 100) / 100 + " degrees Celsius" : "" } 
+              { this.state.temperature ? Math.round(this.state.temperature * 100) / 100 + " degrees Celsius" : "" }
               { this.state.weather ? "and " + this.state.weather : "" }
             </div>
           );
